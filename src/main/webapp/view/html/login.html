@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/resources/css/style.css" rel="stylesheet">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function setKey(key,val) {
+            var curTime = new Date().getTime();
+            console.info("kaishi"+val);
+            localStorage.setItem(key,JSON.stringify({data:val,time:curTime}))
+        }
+        function getKey(key){
+            var data=localStorage.getItem(key);
+            console.info(data);
+            var dataObj = JSON.parse(data);
+            console.info(dataObj);
+            return dataObj.data;
+        }
+    </script>
+</head>
+<body>
+<table>
+    @var a = 2;
+    @var b = 3;
+    @var result = a+b;
+    <h1>hello 2+3=${result}</h1>
+    <tr>
+        <td>name</td>
+        <td><input type="text" id="username" name="username"/></td>
+    </tr>
+    <tr>
+        <td>pwd</td>
+        <td><input type="text" id="password" name="password"/></td>
+    </tr>
+    <tr>
+        <td><input type="button" id="loginSub" value="登录" onclick="login()"></td>
+        <td><input type="button" id="register" value="注册" onclick="aaa()"></td>
+        <td><input type="button" id="logTest" value="test" onclick="test()"></td>
+    </tr>
+</table>
+<script>
+    function test() {
+        var token = getKey("a123token");
+        $.ajax({
+            dataType:"json",
+            contentType: "application/json;charset=utf-8",
+            url:"aaaa",
+            type:"GET",
+            beforeSend: function (XMLHttpRequest) {
+                XMLHttpRequest.setRequestHeader("token", token);
+            },
+            success:function (result) {
+                alert(result);
+            }
+        })
+    }
+    function aaa() {
+        var token = getKey("a123token");
+        alert(token);
+    }
+    function login() {
+        var code = $("#username").val();
+        var pwd = $("#password").val();
+        console.info(code);
+        console.info(pwd);
+        var sendData = {userCode:code,pwd:pwd};
+        var token = "";
+        $.ajax({
+            dataType:"json",
+            contentType: "application/json;charset=utf-8",
+            url:"login/sysUserLogin",
+            type:"POST",
+            data:JSON.stringify(sendData),
+            success:function (result) {
+                alert(result.data.token);
+                token = result.data.token;
+                setKey("a123token",token);
+            }
+        })
+    }
+</script>
+</body>
+</html>
