@@ -9,4 +9,10 @@ import java.io.Serializable;
  * @date 16:44 2019/6/13
  */
 public interface BaseService<T,PK extends Serializable> {
+
+    public int insert(PK bean);
+
+    public int update(PK bean);
+
+
 }

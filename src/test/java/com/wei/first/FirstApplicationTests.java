@@ -3,6 +3,7 @@ package com.wei.first;
 import com.alibaba.fastjson.JSONObject;
 import com.wei.first.bean.GetPhoto;
 import com.wei.first.mapper.GetPhotoMapper;
+import com.wei.first.service.PhotoService;
 import com.wei.first.service.SysUserService;
 import com.wei.first.utils.Base64Utils;
 import com.wei.first.utils.HttpsUtil;
@@ -12,6 +13,11 @@ import io.jsonwebtoken.Claims;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.realm.SimpleAccountRealm;
+import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -37,12 +43,43 @@ public class FirstApplicationTests {
     @Autowired
     GetPhotoMapper getPhotoMapper;
 
+    @Autowired
+    PhotoService photoService;
+
+    @Test
+    public void shiroTest(){
+        SimpleAccountRealm simpleAccountRealm = new SimpleAccountRealm();
+        simpleAccountRealm.addAccount("xiehuaxin","123456","admin","user");
+        DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager();
+        defaultSecurityManager.setRealm(simpleAccountRealm);
+
+        //2.获取向Security Manager提交请求的subject，而主体subject可以通过shiro提供的一个工具类SecurityUtils来获取
+        SecurityUtils.setSecurityManager(defaultSecurityManager);//使用SecurityUtils之前要设置Security Manager环境
+        Subject subject = SecurityUtils.getSubject();
+
+        //3.主体Subject提交请求给Security Manager -->  subject.login(token);
+        UsernamePasswordToken token = new UsernamePasswordToken("xiehuaxin","123456");//提交请求时需要一个token，所以要先创建token
+        System.out.println("---------"+token.getUsername());
+        subject.login(token);
+        subject.checkRoles("a123");
+        //4. shiro提供了一个检查主体subject是否认证的方法isAuthenticated(),此方法的返回结果是一个boolean值
+        System.out.println(subject.isAuthenticated());
+
+        /*subject.logout();
+        System.out.println(subject.isAuthenticated());*/
+    }
+
+    @Test
+    public void addPhoto(){
+    }
+
     /**
      * 下载附件信息
      */
     @Test
     public void contextLoads() {
         try {
+
             File file = new File("D:\\100925File\\01.xls");
             FileInputStream in = new FileInputStream(file);
             XSSFWorkbook workbook = new XSSFWorkbook(in);
