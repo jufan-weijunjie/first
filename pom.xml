@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.wei</groupId>
     <artifactId>first</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>first</name>
     <description>Demo project for Spring Boot</description>
@@ -87,13 +87,13 @@
             &lt;!&ndash;打包的时候忽略该依赖，放在tomcat容器中启动会有依赖冲突&ndash;&gt;
             <scope>provided</scope>
         </dependency>-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <!--打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。
-                相当于compile，但是打包阶段做了exclude操作-->
+            &lt;!&ndash;打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。
+                相当于compile，但是打包阶段做了exclude操作&ndash;&gt;
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
         <!--<dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -187,6 +187,11 @@
         </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
         <!--<dependency>-->
@@ -271,6 +276,12 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+
+            </plugin>
             <!--安装本地jar包到maven仓库-->
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -299,7 +310,7 @@
             <resource>
                 <!--把web-inf下的文件放在resources-->
                 <directory>src/main/webapp/</directory>
-                <targetPath>/</targetPath>
+                <filtering>false</filtering>
                 <includes>
                     <include>**/*</include>
                 </includes>
