@@ -29,7 +29,7 @@ public class MyShiroRealm extends AuthorizingRealm{
         super.setName("customReal");//自定义
     }
     /**
-     * 用来做授权(就是checkRole，checkPermission时用到的)
+     * 用来做授权(就是checkRole，checkPermission时用到的)验证权限，验证身份
      * @param principalCollection
      * @return
      */

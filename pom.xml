@@ -112,7 +112,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--springboottest-->
+        <!--springbootTest-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -124,6 +124,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
+        <!--jedis客户端-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -150,11 +151,13 @@
             <artifactId>nekohtml</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <!--lang3工具包-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -250,6 +253,7 @@
             <artifactId>httpmime</artifactId>
             <version>4.5.3</version>
         </dependency>
+        <!--poi-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -282,12 +286,11 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
-
-            </plugin>
+            </plugin>-->
             <!--安装本地jar包到maven仓库-->
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -316,6 +319,7 @@
             <resource>
                 <!--把web-inf下的文件放在resources-->
                 <directory>src/main/webapp/</directory>
+                <!--是否替换转译符（没有这个配置package&install会发生异常）-->
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*</include>
