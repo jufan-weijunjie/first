@@ -70,20 +70,6 @@
   <sql id="Base_Column_List">
     id, user_role, role_power_name, role_power_status, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.wei.first.bean.SysRolePowerQuery" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sys_role_power
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -93,12 +79,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_role_power
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.wei.first.bean.SysRolePowerQuery">
-    delete from sys_role_power
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.wei.first.bean.SysRolePower">
     insert into sys_role_power (id, user_role, role_power_name, 
@@ -151,50 +131,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wei.first.bean.SysRolePowerQuery" resultType="java.lang.Long">
-    select count(*) from sys_role_power
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update sys_role_power
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.userRole != null">
-        user_role = #{record.userRole,jdbcType=VARCHAR},
-      </if>
-      <if test="record.rolePowerName != null">
-        role_power_name = #{record.rolePowerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.rolePowerStatus != null">
-        role_power_status = #{record.rolePowerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update sys_role_power
-    set id = #{record.id,jdbcType=INTEGER},
-      user_role = #{record.userRole,jdbcType=VARCHAR},
-      role_power_name = #{record.rolePowerName,jdbcType=VARCHAR},
-      role_power_status = #{record.rolePowerStatus,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.wei.first.bean.SysRolePower">
     update sys_role_power
     <set>

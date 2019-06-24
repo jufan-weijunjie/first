@@ -86,13 +86,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wei.first.bean.GetPhoto">
-    insert into get_photo (id, photo_index, photo_code, 
+    insert into get_photo ( photo_index, photo_code,
       photo_name, narrow_url, clear_url, 
-      total, create_time, update_time, 
+      total,
       status)
-    values (#{id,jdbcType=INTEGER}, #{photoIndex,jdbcType=INTEGER}, #{photoCode,jdbcType=VARCHAR}, 
+    values ( #{photoIndex,jdbcType=INTEGER}, #{photoCode,jdbcType=VARCHAR},
       #{photoName,jdbcType=VARCHAR}, #{narrowUrl,jdbcType=VARCHAR}, #{clearUrl,jdbcType=VARCHAR}, 
-      #{total,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{total,jdbcType=INTEGER},
       #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wei.first.bean.GetPhoto">
