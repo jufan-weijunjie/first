@@ -1,6 +1,7 @@
 package com.wei.first.common;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * FileName：BaseService
@@ -10,9 +11,13 @@ import java.io.Serializable;
  */
 public interface BaseService<T,PK extends Serializable> {
 
-    public int insert(PK bean);
+    public int insert(T bean);
 
-    public int update(PK bean);
+    public int update(T bean);
+
+    public int insertByBatch(List<T> entityList);
+
+    public T selectByEntity(T entity);
 
 
 }

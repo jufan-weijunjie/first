@@ -6,6 +6,10 @@ import com.wei.first.bean.GetPhoto;
 import com.wei.first.utils.HttpsUtil;
 import org.junit.Test;
 
+import java.lang.reflect.AnnotatedType;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 /**
  *
  */
@@ -45,5 +49,28 @@ public class PhotoTest extends FirstApplicationTests {
             }
 
         }
+    }
+
+    @Test
+    public void addPhotoTest(){
+        ArrayList<GetPhoto> getPhotos = new ArrayList<>();
+            GetPhoto getPhoto = new GetPhoto();
+            getPhoto.setClearUrl("aaaa");
+            getPhoto.setNarrowUrl("bbbb");
+            getPhoto.setPhotoIndex(1);
+            getPhoto.setPhotoName("测试文件");
+            getPhoto.setTotal(3);
+            getPhoto.setStatus("1");
+        Field[] fields = getPhoto.getClass().getDeclaredFields();
+        for (Field field:fields){
+            String name = field.getName();
+            System.out.println(name);
+            AnnotatedType annotatedType = field.getAnnotatedType();
+//            field.get();
+        }
+
+
+
+
     }
 }

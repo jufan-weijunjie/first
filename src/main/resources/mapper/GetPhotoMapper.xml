@@ -208,4 +208,15 @@
       status = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--批量insert-->
+  <insert id="insertByBatch" parameterType="com.wei.first.bean.GetPhoto">
+    insert into get_photo (photo_index, photo_code,
+      photo_name, narrow_url, clear_url,total,status)
+    values
+    <foreach collection="list" item="p" index="index" separator=",">
+    ( #{p.photoIndex,jdbcType=INTEGER}, #{p.photoCode,jdbcType=VARCHAR},
+      #{p.photoName,jdbcType=VARCHAR}, #{p.narrowUrl,jdbcType=VARCHAR}, #{p.clearUrl,jdbcType=VARCHAR},
+      #{p.total,jdbcType=INTEGER},#{p.status,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
 </mapper>

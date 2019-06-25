@@ -3,6 +3,7 @@ package com.wei.first.common;
 import com.wei.first.bean.GetPhoto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * FileName：BaseMapper
@@ -18,9 +19,13 @@ public interface BaseMapper<T,PK extends Serializable> {
 
     int insertSelective(T entity);
 
-    GetPhoto selectByPrimaryKey(PK id);
+    T selectByPrimaryKey(PK id);
 
     int updateByPrimaryKeySelective(T entity);
 
     int updateByPrimaryKey(T entity);
+
+    int insertByBatch(List<T> entityList);
+
+    T selectByEntity(T entity);
 }

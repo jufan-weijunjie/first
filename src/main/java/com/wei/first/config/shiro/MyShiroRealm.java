@@ -1,5 +1,7 @@
 package com.wei.first.config.shiro;
 
+import com.wei.first.bean.SysUserRole;
+import com.wei.first.service.UserRoleService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -8,6 +10,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +27,11 @@ import java.util.Set;
  */
 public class MyShiroRealm extends AuthorizingRealm{
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private UserRoleService userRoleService;
+
 
     Map<String, String> userMap = new HashMap<String, String>(16);
     {
@@ -30,7 +40,7 @@ public class MyShiroRealm extends AuthorizingRealm{
     }
     /**
      * 用来做授权(就是checkRole，checkPermission时用到的)验证权限，验证身份
-     * @param principalCollection
+     * @param principalCollection principalCollection
      * @return
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -48,7 +58,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 
     /**
      * 从数据库或缓存中获取权限数据(这里模拟数据库查询)
-     * @param userName
+     * @param userName userName
      * @return
      */
     private Set<String> getPermissionsByUserName(String userName) {
@@ -60,7 +70,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 
     /**
      * 通过用户名获取到角色数据（这里为了简单点就不真的去查询数据库了，仅模拟数据库查询）
-     * @param userName
+     * @param userName userName
      * @return
      */
     private Set<String> getRolesByUserName(String userName) {
@@ -92,5 +102,11 @@ public class MyShiroRealm extends AuthorizingRealm{
     private String getPasswordByUserName(String userName) {
         //这里我就不写查询数据库了，就模拟去查数据库
         return userMap.get(userName);
+    }
+
+    private String getUserRoleByUserName(String userName){
+        SysUserRole sysUserRole = new SysUserRole();
+        userRoleService.selectByEntity(sysUserRole);
+        return "";
     }
 }

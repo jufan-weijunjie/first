@@ -78,9 +78,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wei.first.bean.SysUserRole">
-    insert into sys_user_role (id, user_code, user_role
+    insert into sys_user_role (user_code, user_role
       )
-    values (#{id,jdbcType=INTEGER}, #{userCode,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}
+    values (#{userCode,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wei.first.bean.SysUserRole">
@@ -126,4 +126,29 @@
       user_role = #{userRole,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--批量新增-->
+  <insert id="insertByBatch" parameterType="com.wei.first.bean.SysUserRole">
+    insert into sys_user_role ( user_code, user_role
+      )
+    values
+    <foreach collection="list" separator="," index="index" item="s">
+      ( #{s.userCode,jdbcType=VARCHAR}, #{s.userRole,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <!--通过属性值获取记录-->
+  <select id="selectByEntity" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from sys_user_role
+    where
+      1 = 1
+      <if test="id != null">
+        and #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userCode != null">
+        and #{userCode,jdbcType=VARCHAR}
+      </if>
+      <if test="userRole != null">
+        and #{userRole,jdbcType=VARCHAR}
+      </if>
+    limit 0,1
+  </select>
 </mapper>
