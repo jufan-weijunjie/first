@@ -1,7 +1,5 @@
 package com.wei.first.common;
 
-import com.wei.first.bean.GetPhoto;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,7 +9,7 @@ import java.util.List;
  * @author 魏俊杰
  * @date 16:46 2019/6/13
  */
-public interface BaseMapper<T,PK extends Serializable> {
+public interface BaseMapper<T,PK extends Serializable>{
 
     int deleteByPrimaryKey(PK id);
 

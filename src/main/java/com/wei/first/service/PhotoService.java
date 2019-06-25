@@ -9,6 +9,6 @@ import com.wei.first.common.BaseService;
  * @author 魏俊杰
  * @date 15:45 2019/4/25
  */
-public interface PhotoService extends BaseService<String,GetPhoto> {
+public interface PhotoService extends BaseService<GetPhoto,String> {
 
 }

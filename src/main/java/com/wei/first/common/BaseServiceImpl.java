@@ -13,31 +13,31 @@ import java.util.List;
  * @author 魏俊杰
  * @date 16:43 2019/6/13
  */
-public class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T,PK> {
+public class BaseServiceImpl<T,PK extends Serializable,I extends BaseMapper> implements BaseService<T,PK> {
 
     @Autowired
-    private BaseMapper baseMapper;
+    private I mapper;
 
     @Override
     public int insert(T bean) {
-        return baseMapper.insert(bean);
+        return mapper.insert(bean);
     }
 
     @Override
     public int update(T bean) {
-        return baseMapper.updateByPrimaryKey(bean);
+        return mapper.updateByPrimaryKey(bean);
     }
 
     @Override
     public int insertByBatch(List<T> entityList){
-        return baseMapper.insertByBatch(entityList);
+        return mapper.insertByBatch(entityList);
     }
 
     @Override
     public T selectByEntity(T entity){
 
 
-        return (T)baseMapper.selectByEntity(entity);
+        return (T)mapper.selectByEntity(entity);
     };
 
 

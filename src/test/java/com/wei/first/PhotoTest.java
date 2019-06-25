@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -52,7 +53,7 @@ public class PhotoTest extends FirstApplicationTests {
     }
 
     @Test
-    public void addPhotoTest(){
+    public void addPhotoTest() throws Exception{
         ArrayList<GetPhoto> getPhotos = new ArrayList<>();
             GetPhoto getPhoto = new GetPhoto();
             getPhoto.setClearUrl("aaaa");
@@ -63,10 +64,18 @@ public class PhotoTest extends FirstApplicationTests {
             getPhoto.setStatus("1");
         Field[] fields = getPhoto.getClass().getDeclaredFields();
         for (Field field:fields){
+            //设置权限（可以访问private的属性值）
+            field.setAccessible(true);
             String name = field.getName();
             System.out.println(name);
             AnnotatedType annotatedType = field.getAnnotatedType();
-//            field.get();
+            String typeName = annotatedType.getType().getTypeName();
+            Object o = field.get(getPhoto);
+            if(null == o){
+                System.out.println(name+"属性值为null");
+            }else{
+                System.out.println(name+"有属性值");
+            }
         }
 
 
