@@ -54,32 +54,12 @@ public class PhotoTest extends FirstApplicationTests {
 
     @Test
     public void addPhotoTest() throws Exception{
-        ArrayList<GetPhoto> getPhotos = new ArrayList<>();
+
+//        ArrayList<GetPhoto> getPhotos = new ArrayList<>();
             GetPhoto getPhoto = new GetPhoto();
-            getPhoto.setClearUrl("aaaa");
-            getPhoto.setNarrowUrl("bbbb");
-            getPhoto.setPhotoIndex(1);
-            getPhoto.setPhotoName("测试文件");
-            getPhoto.setTotal(3);
+            getPhoto.setId(5);
             getPhoto.setStatus("1");
-        Field[] fields = getPhoto.getClass().getDeclaredFields();
-        for (Field field:fields){
-            //设置权限（可以访问private的属性值）
-            field.setAccessible(true);
-            String name = field.getName();
-            System.out.println(name);
-            AnnotatedType annotatedType = field.getAnnotatedType();
-            String typeName = annotatedType.getType().getTypeName();
-            Object o = field.get(getPhoto);
-            if(null == o){
-                System.out.println(name+"属性值为null");
-            }else{
-                System.out.println(name+"有属性值");
-            }
-        }
-
-
-
-
+        GetPhoto getPhoto1 = getPhotoMapper.selectByEntity(getPhoto);
+        System.out.println(JSONObject.toJSONString(getPhoto1));
     }
 }

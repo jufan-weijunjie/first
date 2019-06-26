@@ -19,5 +19,7 @@ public interface BaseService<T,PK extends Serializable> {
 
     public T selectByEntity(T entity);
 
+    public T selectByPrimaryKey(PK id);
+
 
 }

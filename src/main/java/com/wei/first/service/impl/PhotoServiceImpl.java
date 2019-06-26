@@ -13,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @date 15:45 2019/4/25
  */
 @Service
-public class PhotoServiceImpl extends BaseServiceImpl<GetPhoto,String,GetPhotoMapper> implements PhotoService {
+public class PhotoServiceImpl extends BaseServiceImpl<GetPhoto,Integer,GetPhotoMapper> implements PhotoService {
 
 }

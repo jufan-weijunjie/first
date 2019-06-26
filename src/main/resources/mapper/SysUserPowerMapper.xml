@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wei.first.mapper.SysUserRoleMapper">
-  <resultMap id="BaseResultMap" type="com.wei.first.bean.SysUserRole">
+<mapper namespace="com.wei.first.mapper.SysUserPowerMapper">
+  <resultMap id="BaseResultMap" type="com.wei.first.bean.SysUserPower">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
-    <result column="user_role" jdbcType="VARCHAR" property="userRole" />
+    <result column="power_name" jdbcType="VARCHAR" property="powerName" />
+    <result column="power_note" jdbcType="VARCHAR" property="powerNote" />
+    <result column="power_status" jdbcType="VARCHAR" property="powerStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,90 +68,97 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_code, user_role
+    id, power_name, power_note, power_status, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user_role
+    from sys_user_power
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_user_role
+    delete from sys_user_power
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wei.first.bean.SysUserRole">
-    insert into sys_user_role (user_code, user_role
+  <insert id="insert" parameterType="com.wei.first.bean.SysUserPower">
+    insert into sys_user_power (id, power_name, power_note, 
+      power_status, create_time, update_time
       )
-    values (#{userCode,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{powerName,jdbcType=VARCHAR}, #{powerNote,jdbcType=VARCHAR}, 
+      #{powerStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wei.first.bean.SysUserRole">
-    insert into sys_user_role
+  <insert id="insertSelective" parameterType="com.wei.first.bean.SysUserPower">
+    insert into sys_user_power
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="userCode != null">
-        user_code,
+      <if test="powerName != null">
+        power_name,
       </if>
-      <if test="userRole != null">
-        user_role,
+      <if test="powerNote != null">
+        power_note,
+      </if>
+      <if test="powerStatus != null">
+        power_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="userCode != null">
-        #{userCode,jdbcType=VARCHAR},
+      <if test="powerName != null">
+        #{powerName,jdbcType=VARCHAR},
       </if>
-      <if test="userRole != null">
-        #{userRole,jdbcType=VARCHAR},
+      <if test="powerNote != null">
+        #{powerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="powerStatus != null">
+        #{powerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wei.first.bean.SysUserRole">
-    update sys_user_role
+  <update id="updateByPrimaryKeySelective" parameterType="com.wei.first.bean.SysUserPower">
+    update sys_user_power
     <set>
-      <if test="userCode != null">
-        user_code = #{userCode,jdbcType=VARCHAR},
+      <if test="powerName != null">
+        power_name = #{powerName,jdbcType=VARCHAR},
       </if>
-      <if test="userRole != null">
-        user_role = #{userRole,jdbcType=VARCHAR},
+      <if test="powerNote != null">
+        power_note = #{powerNote,jdbcType=VARCHAR},
+      </if>
+      <if test="powerStatus != null">
+        power_status = #{powerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wei.first.bean.SysUserRole">
-    update sys_user_role
-    set user_code = #{userCode,jdbcType=VARCHAR},
-      user_role = #{userRole,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.wei.first.bean.SysUserPower">
+    update sys_user_power
+    set power_name = #{powerName,jdbcType=VARCHAR},
+      power_note = #{powerNote,jdbcType=VARCHAR},
+      power_status = #{powerStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <!--批量新增-->
-  <insert id="insertByBatch" parameterType="com.wei.first.bean.SysUserRole">
-    insert into sys_user_role ( user_code, user_role
-      )
-    values
-    <foreach collection="list" separator="," index="index" item="s">
-      ( #{s.userCode,jdbcType=VARCHAR}, #{s.userRole,jdbcType=VARCHAR})
-    </foreach>
-  </insert>
-  <!--通过属性值获取记录-->
-  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.wei.first.bean.SysUserRole">
-    select <include refid="Base_Column_List"/> from sys_user_role
-    where
-      1 = 1
-      <if test="id != null">
-        and #{id}
-      </if>
-      <if test="userCode != null">
-        and #{userCode,jdbcType=VARCHAR}
-      </if>
-      <if test="userRole != null">
-        and #{userRole,jdbcType=VARCHAR}
-      </if>
-    limit 0,1
-  </select>
 </mapper>
