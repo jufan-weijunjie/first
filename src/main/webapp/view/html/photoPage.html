@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function searchPhotoTitle() {
+            var pageIndex = $("#pageIndex").val();
+            var pageSize = $("#pageSize").val();
+            $.ajax({
+                dataType:"json",
+                contentType: "application/json;charset=utf-8",
+                url:"/get/photo/photoPageS?pageIndex="+pageIndex+"&pageSize="+pageSize,
+                type:"GET",
+                success:function () {
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>pageIndex</td>
+            <td><input type="text" id="pageIndex" name="pageIndex" value="1"/></td>
+            <td>pageSize</td>
+            <td><input type="text" id="pageSize" name="pageSize" value="10" /></td>
+            <td><input type="button" onclick="searchPhotoTitle()" value="搜索"></td>
+        </tr>
+    </table>
+    <table>
+        @for(photo in photos){
+        <tr>
+            <td><a class="title" href="getPhotoByCode?photoCode=${photo.photoCode}" >${photo.photoCode}+${photo.photoName}</a></td>
+        </tr>
+        @}
+    </table>
+</body>
+</html>

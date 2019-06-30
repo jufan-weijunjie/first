@@ -255,4 +255,18 @@
       and id = #{id}
     </if>
   </select>
+  <!--获取当前所有图片的title列表-->
+  <select id="getPhotoTitleList" resultMap="BaseResultMap">
+    SELECT photo_code,photo_name FROM `get_photo` GROUP BY photo_code ORDER BY photo_code desc limit #{pageIndex},#{pageSize}
+  </select>
+  <!--根据对象获取所有符合条件的数据-->
+  <select id="selectTitleCount" resultType="int">
+    select sum(1) from (
+      select photo_code from `get_photo` GROUP BY photo_code
+    ) a
+  </select>
+    <!---->
+    <select id="getPhotoByPhotoCode" resultMap="BaseResultMap">
+      SELECT * FROM `get_photo` where photo_code = #{photoCode}
+    </select>
 </mapper>

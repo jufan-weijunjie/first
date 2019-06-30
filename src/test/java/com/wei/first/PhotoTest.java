@@ -3,13 +3,14 @@ package com.wei.first;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wei.first.bean.GetPhoto;
+import com.wei.first.mapper.GetPhotoMapper;
+import com.wei.first.service.PhotoService;
 import com.wei.first.utils.HttpsUtil;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,9 @@ public class PhotoTest extends FirstApplicationTests {
 //    1708
 //    https://api.tuwan.com/apps/Welfare/detail?type=image&dpr=3&id=1708
 //    1554
+
+    @Autowired
+    PhotoService photoService;
     @Test
     public void getPhotos(){
 
@@ -56,10 +60,13 @@ public class PhotoTest extends FirstApplicationTests {
     public void addPhotoTest() throws Exception{
 
 //        ArrayList<GetPhoto> getPhotos = new ArrayList<>();
-            GetPhoto getPhoto = new GetPhoto();
+            /*GetPhoto getPhoto = new GetPhoto();
             getPhoto.setId(5);
             getPhoto.setStatus("1");
         GetPhoto getPhoto1 = getPhotoMapper.selectByEntity(getPhoto);
-        System.out.println(JSONObject.toJSONString(getPhoto1));
+        System.out.println(JSONObject.toJSONString(getPhoto1));*/
+//        basePageService.
     }
+
+
 }

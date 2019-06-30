@@ -43,12 +43,12 @@ public class UserLoginController {
         return mv;
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @RequestMapping("/aaaa")
     public Object aaaa(){
         BaseResponse baseResponse = new BaseResponse();
         return baseResponse;
-    }
+    }*/
 
     @RequestMapping("/login")
     public String loginPage(){

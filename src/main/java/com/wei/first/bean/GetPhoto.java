@@ -1,9 +1,11 @@
 package com.wei.first.bean;
 
+import com.wei.first.common.BasePageBean;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class GetPhoto implements Serializable {
+public class GetPhoto extends BasePageBean {
     private Integer id;
 
     /**

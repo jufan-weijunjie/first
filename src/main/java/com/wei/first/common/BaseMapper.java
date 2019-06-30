@@ -26,4 +26,9 @@ public interface BaseMapper<T,PK extends Serializable>{
     int insertByBatch(List<T> entityList);
 
     T selectByEntity(T entity);
+
+    /*------------------page分页------------------------------------*/
+//    int pageSelectCountByBean(T bean);
+
+//    List<T> pageSelectListByBean(T bean);
 }
