@@ -43,6 +43,13 @@ public class UserLoginController {
         return mv;
     }
 
+    @RequestMapping("/")
+    public ModelAndView index(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("index");
+        return mv;
+    }
+
     /*@ResponseBody
     @RequestMapping("/aaaa")
     public Object aaaa(){

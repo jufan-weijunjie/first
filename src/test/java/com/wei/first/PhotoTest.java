@@ -68,5 +68,12 @@ public class PhotoTest extends FirstApplicationTests {
 //        basePageService.
     }
 
-
+    @Test
+    public void addTest(){
+        /*ArrayList<GetPhoto> getPhotos = new ArrayList<>();
+        GetPhoto getPhoto = new GetPhoto();
+        getPhotos.add(getPhoto);
+        getPhoto.setId(2);
+        System.out.println(JSONObject.toJSONString(getPhotos));*/
+    }
 }
