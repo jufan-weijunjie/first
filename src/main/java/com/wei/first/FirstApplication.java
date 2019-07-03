@@ -31,7 +31,7 @@ public class FirstApplication extends SpringBootServletInitializer {
         return application.sources(FirstApplication.class);
     }*/
 
-   @Bean(initMethod = "init", name = "beetlConfig")
+   /*@Bean(initMethod = "init", name = "beetlConfig")
     public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration(){
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
         ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
@@ -55,5 +55,5 @@ public class FirstApplication extends SpringBootServletInitializer {
         beetlSpringViewResolver.setOrder(0);
         beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
         return beetlSpringViewResolver;
-    }
+    }*/
 }

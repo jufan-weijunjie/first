@@ -47,12 +47,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!--排除内置tomcat-->
-            <!--<exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
         <!--shiro权限管理-->
         <dependency>
@@ -141,16 +141,21 @@
             <version>1.2.0.M1</version>
         </dependency>
         <!--springboot官方推荐模板引擎，良好的前后端分离，响应速度慢，标签化严重，不方便-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-el</artifactId>
+            <version>9.0.16</version>
+        </dependency>-->
         <!--html解析包，把网页解析成为DOM树-->
-        <dependency>
+        <!--<dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
             <version>RELEASE</version>
-        </dependency>
+        </dependency>-->
         <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -317,7 +322,7 @@
         </plugins>
         <resources>
             <resource>
-                <!--把web-inf下的文件放在resources-->
+                <!--把webapp下的文件放在resources-->
                 <directory>src/main/webapp/</directory>
                 <!--是否替换转译符（没有这个配置package&install会发生异常）-->
                 <filtering>false</filtering>
