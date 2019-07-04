@@ -32,32 +32,6 @@ public class MyMvcConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/view").addResourceLocations("/WEB-INF/" + "/view/");
     }
 
-    @Bean(initMethod = "init", name = "beetlConfig")
-    public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration(){
-        BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
-        ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
-        try {
-            // WebAppResourceLoader 配置root路径是关键
-            WebAppResourceLoader webAppResourceLoader = new WebAppResourceLoader(patternResolver.getResource("classpath:/").getFile().getPath());
-            beetlGroupUtilConfiguration.setResourceLoader(webAppResourceLoader);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        } //读取配置文件信息
-        return beetlGroupUtilConfiguration;
-    }
-
-    @Bean(name = "beetlViewResolver")
-    public BeetlSpringViewResolver getBeetlSpringViewResolver(@Qualifier("beetlConfig") BeetlGroupUtilConfiguration beetlGroupUtilConfiguration){
-        BeetlSpringViewResolver beetlSpringViewResolver = new BeetlSpringViewResolver();
-        beetlSpringViewResolver.setPrefix("view/html/");
-        beetlSpringViewResolver.setSuffix(".html");
-        beetlSpringViewResolver.setContentType("text/html;charset=UTF-8");
-        beetlSpringViewResolver.setOrder(0);
-        beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
-        return beetlSpringViewResolver;
-    }
-
     /**
      *  addPathPatterns添加拦截器 excludePathPatterns过滤拦截器
      * @param registry

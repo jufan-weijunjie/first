@@ -50,6 +50,10 @@ jwt:
   id: jwt
   time: 604800000
 
+beetlsql:
+  enabled : false
+
+
 
 
 

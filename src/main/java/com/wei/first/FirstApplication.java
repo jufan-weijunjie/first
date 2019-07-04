@@ -1,5 +1,6 @@
 package com.wei.first;
 
+import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
@@ -31,9 +32,19 @@ public class FirstApplication extends SpringBootServletInitializer {
         return application.sources(FirstApplication.class);
     }*/
 
-   /*@Bean(initMethod = "init", name = "beetlConfig")
+   @Bean(initMethod = "init", name = "beetlConfig")
     public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration(){
+       System.out.println("*****加载beetl模板引擎相关配置*****");
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
+       ClassLoader loader = Thread.currentThread().getContextClassLoader();
+       if(loader==null){
+           loader = FirstApplication.class.getClassLoader();
+       }
+       ClasspathResourceLoader cploder = new ClasspathResourceLoader(loader);
+       beetlGroupUtilConfiguration.setResourceLoader(cploder);
+       beetlGroupUtilConfiguration.init();
+       //如果使用了优化编译器，涉及到字节码操作，需要添加ClassLoader
+       beetlGroupUtilConfiguration.getGroupTemplate().setClassLoader(loader);
         ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
         try {
             // WebAppResourceLoader 配置root路径是关键
@@ -54,6 +65,7 @@ public class FirstApplication extends SpringBootServletInitializer {
         beetlSpringViewResolver.setContentType("text/html;charset=UTF-8");
         beetlSpringViewResolver.setOrder(0);
         beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
+        System.out.println("*****beetl模板引擎相关配置完成*****");
         return beetlSpringViewResolver;
-    }*/
+    }
 }
