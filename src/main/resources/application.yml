@@ -17,19 +17,14 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-#  thymeleaf:
-#    prefix: classpath:/view/html/
-#    suffix: .html
-#    cache: false
-#    mode: HTML
-#    servlet:
-#      content-type: text/html
 
 
   redis:
     host: 123.206.199.77
     password: weijunjie123
     port: 6379
+  thymeleaf:
+    cache: false
 #  mvc:
 #    view:
 #      suffix: .html
